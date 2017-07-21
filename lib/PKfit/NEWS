@@ -1,0 +1,302 @@
+
+PKfit - A Data Analysis Tool for Pharmacokinetics
+
+Update logs (v1.3.8)
+--------------------
+06/08/2017
+---
+ 1. fixed unable to run without RStudio;
+ 
+Update logs (v1.3.7)
+--------------------
+02/07/2017
+---
+ 1. fixed PKfit to be able to run on RStudio too; using external graphic devices (i.e.,
+    R default graphic device) outside RStudio;
+ 2. simplified all fitting algorithms with an additional function, such as
+    read.par.from.stored(), to load previous parameter set from fitting or simulation run;
+ 3. added plotting the shades of 95%CI for fitting predicted values for linear plots
+    only; this function is only for the package 'proto' with version 0.3.10; not working
+    with proto v1.0.0 now;
+ 4. remove all codes with 'dev.new()';
+ 5. added automatically 'file save' functions after each simulation; no more asking users
+    to save or not;
+ 6. tested PKfit on RStudio and fixed its compatibility with RStudio; such as using
+    source('simmodel.R') on RStudio;
+ 7. fixed with dev.off() only when exiting PKfit;
+ 8. turned on 'windows(record=TRUE)' when running with Rgui and platforms is Windows OS;
+
+Update logs (v1.3.6)
+--------------------
+06/01/2016
+---
+ 1. made the labeling of x-axis and y-axis with simulation plot more
+    flexible, if using user's defined model; used to be fixed as "time after
+    dosing" and "simulated drug plasma conc."; this may not be applicable to
+    all user's defined models (such as Hills equation);
+ 2. updated the template file for simulation; also adding a new template file;
+ 
+01/27/2016
+---
+ 1. fixed fbolus2() singled-dose;
+ 2. fixed ffisrt.lag() with 'fm <-nlsLM(...,data=subset(PKindex,Subject==i)..);
+ 3. fixed the single-dose codes for ffirst.lag(), fbolus1(), ffirst2(), fbolus2(),
+    ffirst.nolag(),finfu1(), finfu2() and fzero.nolag();
+ 4. fixed plotting.lin() and plotting.non() to expand the y-scale more; 
+    taking max(Cp_calc, Cp_obs)*1.2; it looks much better now;
+ 5. fixed finfu1() with the error of calling fit.final.output();
+ 
+01/02/2016 (v1.3.4)
+---
+ 1. removed mcsim_subj*.csv after used; keep output files as simple as possible;
+ 2. started using 'importFrom()' in NAMESPACE;
+ 3. fixed plotting.non() with weighting schemes;
+ 4. added warning messages if running  with RStudio.
+ 
+Update logs (v1.3.3)
+--------------------
+11/11/2015
+---
+ 1. changed the function of end.fitting() to after.fitting() to comply S3 rule;
+ 2. added shaded plots for mc simulations;
+ 3. added a new function - montecarlo2() to plot 95%CI shaded area for mc
+    simulations;
+ 4. updated and fixed all simulation modules;
+ 5. made the 95%CI lines more smoothing using spline(); looks great now;
+    
+Update logs (v1.3.2)
+--------------------
+10/17/2015
+---
+ 1. add two more functions,fit.final.output() and end.fitting(), to simplify the fitting
+    algorithms;
+ 2. fixed normal fitting for macroconstant/exponential terms by adding a new function (
+    data.manipulate.alpha(); forgot to load dataset first;
+ 3. fixed fmacro.one(); removed remark signs for objfun;
+ 
+Update logs (v1.3.1)
+--------------------
+10/16/2015
+---
+ 1. fixed the menu levels for smacro() and macro();
+ 2. fixed all monte-carlo sim; moved 're#?' backward right before starting running 
+    simulations;
+ 3. changed added error type with runif() and as.matrix() to conc.; used to be uniform
+    errors (good<-good+good*runif(length(good),min=-0.15,max=0.15); see the function of
+    add.err() as below described;
+ 4. note: if fitting a simulated dataset, use weighting scheme of 1/cp^2 can get the 
+    best of fit (see weighted residual plots); even with no error involved with PK 
+    parameters (because there are still added random errors to each calc. Cp);
+ 5. added a new function (add.err()) for adding random errors to the final integrated 
+    conc.;
+ 6. fixed err_types(); some errors schemes never run into negative values; remove
+    unnecessary codes;
+ 7. fixed all plot algorithms; only labeling parts;
+ 8. added new functions: para_err() (simulation only), save.plots.as.pdf() (both fitting 
+    and simulation), before.start.fitting() (fitting only), check.para() (for both); to 
+    make codes more readable and simplified codes;
+ 9. fixed savefile() and data.manipulate() again for correct loops;
+10. fixed simulation time points (single-dosed) for more easily be edited; for linux pc,
+    after finishing editing, press ":" once and then type "wq" (save/write and quit; like
+    vi?);
+11. fixed all plots to display complete graphics; set ylim=c().
+ 
+Update logs (v1.3.0)
+--------------------
+10/13/2015
+---
+ 1. added normal fitting for multiple-dose; ffirst2() was the 1st one successfully done;
+    finished adding all normal fitting for multiple-dosed;
+ 2. fixed sbolus1() for multiple-dosed simulation with iv bolus, 1st-ordered elim;
+ 3. fixed selection menus for all levels; also added some new menu for multiple-dose
+    normal fitting algorithms; fixed menu to be more easily selected;
+ 4. fixed many other minor errors (incl. incorrect version display, entertitle(), 
+    data.manipulate();savefile(),legacy.function(); and ...)
+ 
+Update logs (v1.2.9)
+--------------------
+10/09/2015
+---
+ 1. tried to look for simulation parameter set if not existed the previous
+    fitting parameter set for all fitting algorithms; this is specially useful
+    for users to do a simulation (single-dose, non Monte-carlo) first, and save 
+    the simulated dataset, followed by fitting this simulated dataset immediately;
+    users do not have to look back what the values of all PK parameters used to
+    do previous simulation; the difference dataset between simulation and fitting
+    is just one (i.e., subject's number used in simulation);
+ 2. fixed all write.csv(...) to remove 'col.names=TRUE';
+ 
+Update logs (v1.2.8)
+--------------------
+10/08/2015
+---
+ 1. added noise (error) into final simulated conc. using [conc+ runif(+/- 0.1*conc)] 
+    for every simulation algorithms; macroconstants are all in *.out();
+ 2. fixed fmacro.two() for the consistence of smacro.two();
+ 3. fixed smacro.two() & smacro.two.out() to remove par4 from arguments;
+
+Update logs (v1.2.7)
+--------------------    
+10/07/2015
+---
+ 1. moved deSolve in DESCRIPTION to Imports section; hide all loading 
+    message for deSolve;
+ 2. fixed all simulation scripts; not to 'dev.new() & par(mfrow=c(2,1),las=1)' 
+    before error types are entered to hide an empty plot; include 'simmodel.R'
+    in the user's define model;
+ 3. fixed macroconstant simulation with adding preset simulation time;
+ 4. changed two-exponential term to A*(exp(-alpha*t)-exp(-beta*t)) which is a
+    one-compartment PK model with the 1st-ordered absorption and the 1st-ordered
+    elimination; the old one is A*exp(-alpha*t)+B*exp(-beta*t) (a two-compartment
+    PK model after iv bolus);
+ 
+Update logs (v1.2.6)
+--------------------
+09/26/2015
+---
+ 1. fixed data.manipulate() for *.RData input error;
+ 2. fixed output version info;
+ 3. replaced show(...) with print(*, row.names=F) to hide row
+    numbering;
+ 4. remark weights output in aicllsbc(); for debugging purpose.
+ 5. fixed model selection index output --> "SBC/BIC"
+ 
+Update logs (v1.2.5)
+--------------------
+02/17/2015
+---
+ 1. added citation into output files;
+ 2. removed CITATION file;
+ 3. fixed finfu2() and thanks llan for reporting this error;
+ 4. changed the name of 'mymodel.R' to 'fitmodel.R';
+ 5. fixed sinfu2() and sinfu(); removed events from both to avoid
+    double doses; one from defun() and the other from events().
+ 6. fixed output info;
+ 7. fixed 'Description' content in DESCRIPTION.
+ 
+ 
+Update logs (v1.2.4)
+--------------------
+10/22/2014
+---
+ 1. starting to switch to optimx() since this release; seemed
+    more stable than optim() with different weighting schemes;
+ 2. fixed iv.bolus.demo() for no-stopping plotting;
+ 3. fixed plotting.xxx() by adding par(ask = FALSE);
+ 4. fixed weighting schemes for nlsLM() with Cp = 0.;
+ 5. added CITATION file in the folder of inst;
+  
+Update logs (v1.2.3)
+--------------------
+08/21/2014
+---
+ 1. fixed DESCRIPTION content;
+ 2. fixed output files of monte-carlo sim for szero.nolag();
+ 3. added err_types() to simplified all simulation codes;
+ 4. added UserDefinedModels directory for users required to define
+    their own models;
+ 5. fixed iv.bolus.demo();
+ 6. added mymodel.R in UserDefinedModels;
+ 7. added simModle.R in UserDefinedModels;
+ 
+
+06/24/2014 (v1.2.2)
+---
+ 1. fixed return back to PK.fit() after each fitting job; not the
+    top menu (run()); don't need to load data file again;
+ 2. added "fbolus3.mm()" model;
+ 3. fixed 'Press Enter to continue...' for each model file; this
+    can save mouse click from graphic window back to R console;
+ 4. added optim(...,control=list(maxit=5000)) for each fitting 
+    algorithm;
+ 5. for macroconstant-term model, using equal weighting scheme may
+    cause error with messages something like "... Error in 
+    nlsModel(formula, mf, start, wts) : singular gradient matrix 
+    at initial parameter estimates.."; using '1/Cp' or '1/Cp^2' 
+    is fine; don't know why yet; same as nls();
+ 6. added PK.sim() after each simulation run; no need to go back to
+    the top menu;
+ 7. added logo for normal fitting outputs;
+ 8. fixed the menu flow, i.e., after finishing loading/editing 
+    the data file, then go next to 'model selection' menu;
+ 9. fixed arguments of nlsLM(...);
+10. fixed output formatting;
+11. re-fined plotting curve (calculated conc.);
+12. fixed iv.bolus.demo() & mmpk.demo() with nlsLM();
+13. added output files for simulation runs simultaneously with
+    screen outputs;
+14. fixed plotting.lin() and plotting.non();
+15. added automatic output file names generated to avoid overwriting
+    the existed output files;
+16. added the time points for simulation run can be saved as a .csv 
+    in the working path now; this file will be checked automatically,
+    if existed, it will be loaded back to PKfit next time without 
+    entering the time point again;
+17. added autoload of initial values from a previous run saved as *.csv;
+18. added autoload of pk parameters setting from a previous run
+    saved as *.csv;
+19. started to add multiple-dose simulation now; first one is sbolus2_md();
+    seemed looking ok.
+20. fixed ffirst2() again for monte-carlo sim (output problem);
+21. tried to set argument of "lower=c(...)" in nlsLM; with '1e-06' seems ok;
+    but not for fbolus3.mm().
+22. added all multiple-dose simulation except 3-compartment iv bolus;
+23. changed dose input in lsoda(); using dose event to add dose; seems more
+    reasonable with simulated conc..
+24. szero.nolag() still cannot be coded with event() in lsoda()...
+25. fixed output data set for simulation codes with ODEs; 
+    ### dump this subj's data to subj i; all simulations with macroconstants
+    are not changed since they still use *.out() routines.
+
+
+Update logs (v1.2.1)
+--------------------
+
+04/20/2014
+---
+ 1. fixed all Machalis-Menton models; e.g., 
+    dCp(t)/dt = - Vmax*Cp(t)/(Km + Cp(t)), C(0) = Dose/Vd
+    for all fitting and simulation codes.
+ 2. fixed demo(mmpk);
+ 3. fixed read.csv(...,Header=TRUE,...) in data.manipulate() 
+    to correctly import simulated dataset (savefile()); after
+    read.csv() re-assign col.names = cname = 
+    c("Subject", "time", "conc");
+ 4. added the list of input data & initial values for 
+    pk parameters;
+ 5. fixed fzero.nolag();
+ 6. included 'Dose' input in parameter initial values;
+ 7. rearranged output formats;
+ 8. added display the output file directory at final step;
+ 9. added a 3-compartment, iv bolus pk model with 1st-ordered elim.
+10. added "Variance-Covariance Matrix" in the output
+11. switched nls() to nlsLM() from package minpack.lm from this
+    release; the default method 'LM' (the Levenberg-Marquardt 
+    algorithm) is used in PKfit; nlsLM(...,"weight=NULL",...) as 
+    default; we used external setup for weighting scheme to make 
+    the minimum code change;
+12. fixed simulation for iv bolus with 2-compartment, 1st-ordered
+    pk model;
+13. fixed smacro.one(), smacro.two() and smacro.three(); removed
+    'Dose' from the arguments of smacro.one.out(...), etc.; no 
+    Dose is req.;
+14. fixed szero.nolag() with Monte-Carlo sim.;
+15. added the function of input data file could be saved as a .csv
+    format too (with write.csv(...,col.names=TRUE,,,).
+
+04/04/2013 (v1.2.0)
+---
+1. Remove genetic algorithm from PKfit; it still keep
+   Nelder-Mead Simplex (optim) and nls() for Guass_newton.
+2. fixed some settings for methods used in model-fitting.
+   most difficult in this part.
+3. If you get error message something like 'minFactors...',
+   please check your model, check your data and check your
+   initial values.
+4. A .txt output and a .pdf file generated for fitting
+   results and plots, respectively.
+
+---
+  
+ 
+ 

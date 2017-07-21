@@ -1,0 +1,16 @@
+# Default NAMESPACE created by R
+# Remove the previous line if you edit this file
+
+# Export all names
+exportPattern(".")
+
+importFrom("data.table",fread)     ### sinc v1.3.7
+importFrom("minpack.lm",nlsLM,nls.lm.control)
+importFrom("deSolve",lsode,lsoda)
+importFrom("optimx",optimx)
+importFrom("ggplot2",ggplot,aes,scale_fill_discrete,geom_point,
+            geom_line,labs,theme,element_text,scale_colour_discrete,
+            scale_shape_discrete,scale_y_log10,geom_errorbar,
+            element_blank)        ### sinc v1.3.7? not finished yet
+### importFrom("stats4",???)      ### not req.? for 'coeff()'?
+### importFrom("nls2",as.lm.nls)  ### not routinely req., it's only with source()

@@ -1,0 +1,13 @@
+Package: PKfit
+Version: 1.3.8
+Date: 2017-06-08
+Title: Data Analysis Tool for Pharmacokinetics
+Author: Chun-ying Lee, Yung-jin Lee
+Maintainer: Yung-jin Lee <mobilepk@gmail.com>
+Depends: R (>= 3.2.0), nls2
+Description: A nonlinear regression program which is
+        designed to perform model/curve fitting and
+        model simulations for pharmacokinetics.
+License: GPL (>= 2)
+NeedsCompilation: no
+Packaged: 2017-06-08 15:54:04 UTC; datawalker
